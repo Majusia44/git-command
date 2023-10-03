@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+</head>
+<body>
+    <h1>Kalkulator</h1>
+    <form id="Kalkulator-form">
+        <label for="number1">Liczba 1:</label>
+        <input type="number" id="number1" name="number1" value="0">
+        <br>
+        <label for="number2">Liczba 2:</label>
+        <input type="number" id="number2" name="number2" value="0">
+        <br>
+        <label for="number3">Liczba 3:</label>
+        <input type="number" id="number3" name="number3" value="0">
+        <br>
+        <label for="number4">Liczba 4:</label>
+        <input type="number" id="number4" name="number4" value="0">
+        <br>
+        <label for="number5">Liczba 5:</label>
+        <input type="number" id="number5" name="number5" value="0">
+        <br>
+        <label for="number6">Liczba 6:</label>
+        <input type="number" id="number6" name="number6" value="0">
+        <br>
+        <label for="number7">Liczba 7:</label>
+        <input type="number" id="number7" name="number7" value="0">
+        <br>
+        <label for="number8">Liczba 8:</label>
+        <input type="number" id="number8" name="number8" value="0">
+        <br>
+        <label for="number9">Liczba 9:</label>
+        <input type="number" id="number9" name="number9" value="0">
+        <br>
+        <label for="number9">Liczba 10:</label>
+        <input type="number" id="number10" name="number10" value="0">
+        <br>
+        <br>
+
+        <label for="operation">Operacja:</label>
+        <select id="operation" name="operation">
+            <option value="add">Dodawanie</option>
+            <option value="substract">Odejmowanie</option>
+            <option value="multiply">Mnożenie</option>
+            <option value="division">Dzielenie</option>
+        </select>
+
+        <button type="button" onclick="calculate()">Oblicz</button>
+    </form>
+
+    <p> Wynik: <span id="result">-</span></p>
+
+    <script>
+        function calculate() {
+            var numbers = [];
+
+            for (var i = 1; i<=10; i++) {
+                var number = parseFloat(document.getElementById("number" + i).value);
+                if (!isNaN(number)) {
+                    numbers.push(number);
+                }
+            }
+
+            var result = 0;
+            var operation = document.getElementById("operation").value;
+            var resultElement = document.getElementById("result");
+
+            var nonZeroNumbers = numbers.filter(function(number) {
+                return number != 0;
+            })
+
+            switch (operation) {
+                case "add":
+                    for (var i = 0; i < numbers.length; i++) {
+                        result += numbers[i];
+                    }
+                    break;
+                case "substract":
+                    result = numbers[0];
+                    for (var i = 1; i < numbers.length; i++) {
+                        result -= numbers[i];
+                    }
+                    break;
+                case "multiply":
+                    if (nonZeroNumbers.length === 0) {
+                        result = "Nie mozna mnożyć przez zero!"
+                    } else {
+                        result = nonZeroNumbers[0];
+                        for (var i = 1; i < nonZeroNumbers.length; i++) {
+                            result *= nonZeroNumbers[i];
+                        }
+                    }
+                    break;
+                case "division":
+                    if (nonZeroNumbers.length === 0) {
+                        result = "Nie mozna dzielic przez zero!"
+                    } else {
+                        result = nonZeroNumbers[0];
+                        for (var i = 1; i < nonZeroNumbers.length; i++) {
+                            result /= nonZeroNumbers[i];
+                        }
+                    }
+                    break;
+                default:
+                    result = "Nieznana operacja";
+            }
+
+            resultElement.textContent = result;
+        }
+    </script>
+</body>
+</html>
