@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    Napisz funkcję, która przyjmuje tablicę liczb i zwraca sumę wszystkich liczb w tablicy
+</head>
+<body>
+    <form method="post" action="">
+        <label for="number1">Liczba 1:</label>
+        <input type="number" id="number1" name="number1" value="0" min="1" required>
+        <label for="number2">Liczba 2:</label>
+        <input type="number" id="number2" name="number2" value="0">
+        <label for="number3">Liczba 3:</label>
+        <input type="number" id="number3" name="number3" value="0">
+        <button type="button"  onclick="calculate()">Oblicz sumę</button>
+        </form>
+        
+        <p> Wynik: <span id="result">-</span></p>
+
+
+    <script>
+         function calculate() {
+            var result = 0;
+            var resultElement = document.getElementById("result");
+
+            var xd = [];
+
+            for (let i = 1; i<=3; i++) {
+                let number = parseFloat(document.getElementById('number' + i).value);
+                if (!isNaN(number)) {
+                    xd.push(number);
+                }
+            }
+
+            for (let index = 0; index < xd.length; index++) {
+                result += xd[index];
+            }
+
+             resultElement.textContent = result;
+        }
+    </script>
+</body>
+</html>
